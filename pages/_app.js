@@ -16,31 +16,34 @@ const MyApp = ({ Component, pageProps }) => {
 
   useEffect(() => {
     AOS.init();
-  },[]);
+  }, []);
 
   useEffect(() => {
     const handleRouteChange = (url) => {
       gtag.pageview(url);
     };
-    router.events.on("routeChangeComplete", handleRouteChange);
+    router.events.on('routeChangeComplete', handleRouteChange);
 
     return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
+      router.events.off('routeChangeComplete', handleRouteChange);
     };
   }, [router.events]);
 
-  return ( 
+  return (
     <>
       <Head>
         <title>Life Learning</title>
-        <link rel="shortcut icon" href="/img/favicon.ico" />
-        <Script 
-          async 
+        <link
+          rel='shortcut icon'
+          href='/img/favicon.ico'
+        />
+        <Script
+          async
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
         />
         <Script
           dangerouslySetInnerHTML={{
-              __html: `
+            __html: `
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
@@ -50,14 +53,18 @@ const MyApp = ({ Component, pageProps }) => {
           `,
           }}
         />
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3664300978138962" crossorigin="anonymous"></script>
+        <Script
+          async
+          src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3664300978138962'
+          crossOrigin='anonymous'
+        />
       </Head>
       <Layout>
         <Component {...pageProps} />
         <Analytics />
       </Layout>
     </>
-  )
+  );
 };
 
 export default MyApp;
